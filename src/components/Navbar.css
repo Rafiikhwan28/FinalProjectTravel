@@ -1,0 +1,200 @@
+:root {
+  --bg-light: #ffffff;
+  --text-dark: #222222;
+  --gray-light: #f4f4f4;
+  --border: #e0e0e0;
+  --hover-bg: #f0f0f0;
+}
+
+.navbar {
+  background-color: var(--bg-light);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.navbar-logo {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  cursor: pointer;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu li a {
+  color: var(--text-dark);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.nav-menu li a:hover {
+  background-color: var(--hover-bg);
+}
+
+.cart-icon {
+  position: relative;
+  margin-left: 1rem;
+}
+
+.cart-icon a {
+  color: var(--text-dark);
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+
+.cart-badge {
+  background-color: #e74c3c;
+  color: white;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 999px;
+  position: absolute;
+  top: -8px;
+  right: -10px;
+}
+
+.user-dropdown {
+  position: relative;
+  margin-left: 1rem;
+}
+
+.user-avatar {
+  cursor: pointer;
+}
+
+.avatar-img {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  object-fit: cover;
+  background-color: #fff;
+  box-shadow: 0 0 4px rgba(0,0,0,0.15);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  background-color: var(--bg-light);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  z-index: 1000;
+  min-width: 140px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+  display: block;
+  padding: 10px;
+  color: var(--text-dark);
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+  background-color: var(--hover-bg);
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+
+.btn {
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: var(--text-dark);
+  background-color: transparent;
+}
+
+.btn:hover {
+  background-color: var(--hover-bg);
+}
+
+@media screen and (max-width: 768px) {
+  .menu-icon {
+    display: block;
+  }
+
+  .navbar-links {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-light);
+    flex-direction: column;
+    align-items: center;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+
+  .navbar-links.open {
+    max-height: 500px;
+    padding-bottom: 1rem;
+  }
+
+  .nav-menu {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .auth-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .cart-icon {
+    margin: 1rem 0;
+  }
+}

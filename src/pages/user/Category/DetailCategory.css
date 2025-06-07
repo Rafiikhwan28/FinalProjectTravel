@@ -1,0 +1,116 @@
+/* Container utama dengan padding dan max-width responsif */
+.detail-category-container {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 2rem 2.5rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  color: #222;
+  transition: transform 0.3s ease;
+}
+
+/* Hover efek subtle */
+.detail-category-container:hover {
+  transform: translateY(-5px);
+}
+
+/* Judul utama */
+.detail-category-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+  letter-spacing: 1px;
+}
+
+/* Gambar kategori, dengan shadow dan border-radius */
+.detail-category-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  margin-bottom: 2rem;
+  transition: filter 0.3s ease;
+}
+
+/* Efek zoom saat hover gambar */
+.detail-category-image:hover {
+  filter: brightness(1.05);
+  cursor: pointer;
+}
+
+/* Nama kategori */
+.detail-category-name {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #3b82f6; /* biru modern */
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
+}
+
+/* Loading dan error text */
+.loading-text,
+.error-text {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-top: 5rem;
+  color: #6b7280; /* abu medium */
+}
+
+/* Khusus error dengan warna merah */
+.error-text {
+  color: #ef4444;
+}
+
+.detail-category-map-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto 0 auto;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Responsive: untuk layar kecil */
+@media (max-width: 768px) {
+  .detail-category-container {
+    padding: 1.5rem 1.75rem;
+    margin: 2rem 1rem;
+  }
+  
+  .detail-category-title {
+    font-size: 2rem;
+  }
+  
+  .detail-category-image {
+    max-height: 300px;
+  }
+  
+  .detail-category-name {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .detail-category-container {
+    padding: 1rem 1rem;
+    margin: 1.5rem 0.5rem;
+  }
+  
+  .detail-category-title {
+    font-size: 1.75rem;
+  }
+  
+  .detail-category-image {
+    max-height: 220px;
+  }
+  
+  .detail-category-name {
+    font-size: 1.25rem;
+  }
+}

@@ -1,0 +1,96 @@
+/* Container utama halaman kategori */
+.category-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Judul halaman */
+.category-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #1f2937; /* Gray-800 */
+}
+
+/* Loading dan Error Text */
+.loading-text,
+.error-text {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #6b7280; /* Gray-500 */
+}
+
+/* Grid responsif untuk kategori */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Kartu kategori */
+.category-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Link styling */
+.category-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Gambar kategori */
+.category-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid #f3f4f6; /* Light gray border */
+}
+
+/* Nama kategori */
+.category-name {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 1rem;
+  color: #374151; /* Gray-700 */
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .category-title {
+    font-size: 2rem;
+  }
+
+  .category-name {
+    font-size: 1rem;
+  }
+
+  .category-image {
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-title {
+    font-size: 1.75rem;
+  }
+
+  .category-image {
+    height: 130px;
+  }
+}

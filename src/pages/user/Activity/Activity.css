@@ -1,0 +1,156 @@
+/* Reset & Global */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8fafc;
+  color: #333;
+}
+
+/* Container utama */
+.activity-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Judul Halaman */
+.activity-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #1e293b;
+}
+
+/* Loading Spinner */
+.loading-container {
+  text-align: center;
+  margin-top: 3rem;
+  color: #64748b;
+}
+
+.loading-spinner {
+  margin: 0 auto 10px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Error Message */
+.error-message {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ef4444;
+}
+
+/* Filter Kategori */
+.category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.category-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 999px;
+  background-color: #e2e8f0;
+  color: #1e293b;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.category-btn:hover,
+.category-btn.active {
+  background-color: #3b82f6;
+  color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Grid Aktivitas */
+.activity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Item Aktivitas */
+.activity-item {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.activity-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Link Wrapper */
+.activity-link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+/* Gambar */
+.activity-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.no-image-placeholder {
+  height: 200px;
+  background-color: #e5e7eb;
+  color: #6b7280;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+}
+
+/* Judul Item */
+.activity-item-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: center;
+  color: #1f2937;
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+  .activity-title {
+    font-size: 2rem;
+  }
+
+  .activity-image,
+  .no-image-placeholder {
+    height: 160px;
+  }
+
+  .category-btn {
+    font-size: 0.85rem;
+  }
+}
