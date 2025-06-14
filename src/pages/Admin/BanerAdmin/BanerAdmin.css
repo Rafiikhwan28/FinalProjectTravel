@@ -1,0 +1,110 @@
+/* Gaya Umum */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+    margin: 20px 0;
+  }
+  
+  .banner-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .banner-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    width: 250px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .banner-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .banner-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .banner-item p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+    margin: 10px 0;
+  }
+  
+  .banner-item .edit {
+    background-color: #4CAF50;
+    color: white;
+    margin-right: 10px;
+  }
+  
+  .banner-item .delete {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .banner-item button {
+    font-size: 14px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .banner-item button:hover {
+    opacity: 0.9;
+  }
+  
+  /* Responsif */
+  @media (max-width: 768px) {
+    .banner-list {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .banner-item {
+      width: 90%;
+      margin-bottom: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .banner-item {
+      width: 100%;
+      padding: 10px;
+    }
+  
+    .banner-item img {
+      height: 120px;
+    }
+  
+    .banner-item p {
+      font-size: 14px;
+    }
+  
+    .banner-item button {
+      font-size: 12px;
+      padding: 5px 8px;
+    }
+  }
+  

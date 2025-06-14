@@ -1,0 +1,147 @@
+/* Container utama */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.title {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Create User Form */
+.create-user-form {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.create-user-form h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #0073e6;
+}
+
+.create-user-form .MuiTextField-root,
+.create-user-form .MuiFormControl-root {
+  margin-bottom: 15px;
+}
+
+.create-user-form .MuiButton-root {
+  display: block;
+  margin: 0 auto;
+  background-color: #0073e6;
+  color: #fff;
+}
+
+.create-user-form .MuiButton-root:hover {
+  background-color: #005bb5;
+}
+
+/* User List */
+.user-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.user-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 250px;
+  text-align: center;
+  padding: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* User Image */
+.user-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+/* User Info */
+.user-info {
+  text-align: center;
+}
+
+.user-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.user-email,
+.user-role,
+.user-phone {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+/* Buttons */
+.MuiButton-root {
+  margin: 10px 5px;
+}
+
+.MuiButton-containedPrimary {
+  background-color: #0073e6;
+}
+
+.MuiButton-containedPrimary:hover {
+  background-color: #005bb5;
+}
+
+.MuiButton-containedSecondary {
+  background-color: #e60023;
+}
+
+.MuiButton-containedSecondary:hover {
+  background-color: #b5001b;
+}
+
+/* FormControl for Update Role */
+.MuiFormControl-root {
+  margin: 10px 0;
+  width: 100%;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .user-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .user-card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .create-user-form {
+    padding: 10px;
+  }
+}

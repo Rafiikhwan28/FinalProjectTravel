@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import './Login.css'; // Buat styling di sini
+import './Login.css'; 
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,7 +14,7 @@ const Login = () => {
   const handleChangePassword = (e) => setPassword(e.target.value);
 
   const handleLogin = () => {
-    const payload = { email, password };
+    const payload = { email: email, password:password };
 
     axios
       .post("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/login", payload, {

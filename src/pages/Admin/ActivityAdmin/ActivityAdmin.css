@@ -1,0 +1,68 @@
+.activity-container {
+    padding: 20px;
+}
+
+.activity-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.activity-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.activity-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.activity-card h3 {
+    margin: 10px 0;
+}
+
+.activity-form input,
+.activity-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.activity-form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.activity-form button:hover {
+    background-color: #45a049;
+}
+
+button {
+    margin: 5px;
+    padding: 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #da190b;
+}
+
+@media (max-width: 768px) {
+    .activity-list {
+        grid-template-columns: 1fr;
+    }
+}

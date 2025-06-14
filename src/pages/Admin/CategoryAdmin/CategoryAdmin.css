@@ -1,0 +1,79 @@
+/* Container */
+.category-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.category-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* List Styling */
+.category-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.category-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.category-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    flex: 1;
+}
+
+/* Image Styling */
+.category-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 15px;
+}
+
+/* Info Styling */
+.category-info {
+    flex: 1;
+}
+
+.category-info h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #007bff;
+}
+
+.category-info p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Button Styling */
+.add-to-cart-button {
+    flex-shrink: 0;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+.add-to-cart-button:hover {
+    background-color: #0056b3;
+}

@@ -10,6 +10,17 @@ import DetailCategory from "./pages/user/Category/DetailCategory";
 import Promo from "./pages/user/Promo/Promo";
 import DetailPromo from "./pages/user/Promo/DetailPromo";
 
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+import ListBaner from "./pages/Admin/BanerAdmin";
+import Header from "./pages/Admin/HeaderAdmin";
+import Sidebar from "./pages/Admin/Slider";
+import ActivityAdmin from "./pages/Admin/ActivityAdmin";
+import CategoryAdmin from "./pages/Admin/CategoryAdmin";
+import PromoAdmin from "./pages/Admin/PromoAdmin";
+import UserList from "./pages/Admin/UserList";
+// import PaymentMethod from "./component/Pyment";
+// import ProfilePage from "./component/Profil";
+// import DetailBanner from "./component/Baner/DetailBaner";
 
 const App = () => {
   return (
@@ -24,6 +35,15 @@ const App = () => {
         <Route path="/detail-category/:id" element={<DetailCategory/>} />
         <Route path="/promo" element={<Promo/>} />
         <Route path="/detail-promo/:id" element={<DetailPromo/>} />
+
+        <Route path="/header-admin" element={<Header/>}/>
+        <Route path="/slider-admin" element={<Sidebar/>}/>
+        <Route path="/activity-admin" element={<ActivityAdmin/>}/>
+        <Route path="/category-admin" element={<CategoryAdmin/>}/>
+        <Route path="/listBaner-admin" element={<ListBaner/>}/>
+        <Route path="/promo-admin" element={<PromoAdmin/>}/>
+        <Route path="/admin-dashboard" element={<AdminDashboard/>}/>
+        <Route path="/userlist" element={<UserList/>}/>
       </Routes>
     </BrowserRouter>
   );
