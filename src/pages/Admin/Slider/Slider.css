@@ -1,0 +1,51 @@
+.sidebar {
+  background-color:#8CCDEB;
+  color: #fff;
+  width: 250px;
+  padding: 1rem;
+  position: fixed;
+  top: 74px; /* Sesuaikan dengan tinggi header */
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+  z-index: 998;
+}
+
+.sidebar.closed {
+  transform: translateX(-100%);
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar h2 {
+  color: #ffb700;
+  font-size: 1.3rem;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+.sidebar .MuiListItemButton-root {
+  border-radius: 6px;
+  margin-bottom: 0.3rem;
+  transition: background 0.3s ease;
+}
+
+.sidebar .MuiListItemButton-root.active,
+.sidebar .MuiListItemButton-root:hover {
+  background-color:rgb(0, 72, 255);
+  color: #0b132b;
+  font-weight: 600;
+}
+
+.sidebar .MuiListItemIcon-root {
+  min-width: 36px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 220px;
+  }
+}

@@ -22,8 +22,8 @@ const Login = () => {
       })
       .then((res) => {
         const token = res.data.token;
-        const userDetails = res.data;
-        const userRole = res.data.role;
+        const userDetails = res.data.data;
+        const userRole = res.data.data.role;
 
         localStorage.setItem("access_token", token);
         localStorage.setItem("user_details", JSON.stringify(userDetails));

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./Promo.css";
 import Navbar from "../../../components/Navbar";
+import Footer from "../../../components/Footer";
 
 const Promo = () => {
   const [promos, setPromos] = useState([]);
@@ -65,6 +66,7 @@ const Promo = () => {
         </div>
       )}
     </div>
+    <Footer/>
     </>
   );
 };

@@ -1,0 +1,204 @@
+.transaksi-container {
+  padding: 1rem;
+  background: #f9f9f9;
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+}
+
+.transaksi-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: #0b132b;
+}
+
+.filter-container {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+}
+
+.filter-select {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+}
+
+.transaksi-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.transaksi-table th,
+.transaksi-table td {
+  padding: 0.8rem 0.6rem;
+  border: 1px solid #ddd;
+  font-size: 0.9rem;
+  vertical-align: top;
+}
+
+.transaksi-table th {
+  background-color: #f0f0f0;
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.item img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.acc-button {
+  background-color: #1976d2;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.acc-button:hover {
+  background-color: #115293;
+}
+
+.status-select {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+.update-button {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  background-color: #0b132b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s ease;
+}
+
+.update-button:hover {
+  background-color: #ffb700;
+  color: #0b132b;
+  font-weight: 600;
+}
+
+/* ========== Responsive Styles ========== */
+
+/* Smartphone (≤480px) */
+@media (max-width: 480px) {
+  .transaksi-container {
+    padding: 0.8rem;
+  }
+
+  .transaksi-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .filter-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-select {
+    width: 100%;
+  }
+
+  .transaksi-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .transaksi-table th,
+  .transaksi-table td {
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .item img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .update-button {
+    font-size: 0.85rem;
+  }
+}
+
+/* Tablet (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .transaksi-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .transaksi-table th,
+  .transaksi-table td {
+    white-space: nowrap;
+  }
+
+  .item img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .update-button {
+    font-size: 0.9rem;
+  }
+}
+
+/* Desktop (≥1024px) */
+@media (min-width: 1024px) {
+  .transaksi-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .transaksi-table th,
+  .transaksi-table td {
+    font-size: 1rem;
+  }
+
+  .filter-container {
+    justify-content: flex-start;
+  }
+
+  .update-button {
+    font-size: 1rem;
+  }
+}

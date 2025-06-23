@@ -146,6 +146,7 @@ body {
   font-style: italic;
 }
 
+/* Tombol CTA */
 .cta-button {
   display: block;
   width: 100%;
@@ -165,8 +166,24 @@ body {
   background-color: #2563eb;
 }
 
+/* ========================= RESPONSIVE BREAKPOINT ========================= */
 
-/* Responsif untuk layar kecil */
+/* Tablet - layar <= 1024px */
+@media (max-width: 1024px) {
+  .detail-title {
+    font-size: 2.2rem;
+  }
+
+  .right-map {
+    padding: 1.2rem;
+  }
+
+  .detail-image {
+    height: 200px;
+  }
+}
+
+/* HP besar / Tablet kecil - layar <= 768px */
 @media (max-width: 768px) {
   .detail-title {
     font-size: 2rem;
@@ -187,5 +204,51 @@ body {
 
   .price-rating {
     flex-direction: column;
+  }
+
+  .detail-image-container {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+
+  .detail-image {
+    height: 180px;
+  }
+
+  .maps-container iframe {
+    height: 300px;
+  }
+}
+
+/* HP kecil - layar <= 480px */
+@media (max-width: 480px) {
+  .detail-title {
+    font-size: 1.7rem;
+  }
+
+  .detail-info {
+    padding: 1rem;
+  }
+
+  .right-map {
+    padding: 0.8rem;
+  }
+
+  .detail-image-container {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .detail-image {
+    height: 160px;
+  }
+
+  .price-rating p {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .cta-button {
+    padding: 0.7rem;
+    font-size: 1rem;
   }
 }

@@ -1,177 +1,227 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
-import './BanerAdmin.css';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+  CircularProgress,
+} from "@mui/material";
+import "./BanerAdmin.css";
 
 const BanerAdmin = () => {
-    const [Baner, setBaner] = useState([]);
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const [formState, setFormState] = useState({
-        id: null,
-        name: "",
-        imageUrl: "",
-    });
-    const [selectedImage, setSelectedImage] = useState(null);
+  const [banners, setBanners] = useState([]);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [formState, setFormState] = useState({ id: null, name: "", imageUrl: "" });
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-    const apiKey = "24405e01-fbc1-45a5-9f5a-be13afcd757c";
-    const apiUrl = "https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/banners";
+  const API_KEY = "24405e01-fbc1-45a5-9f5a-be13afcd757c";
+  const TOKEN = localStorage.getItem("access_token");
+  const BASE_URL = "https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1";
 
-    // Mengambil daftar banner
-    const getBanerList = () => {
-        axios
-            .get(apiUrl, { headers: { apiKey } })
-            .then((res) => setBaner(res.data.data))
-            .catch((err) => console.log(err.response));
-    };
+  const headers = {
+    apiKey: API_KEY,
+    Authorization: `Bearer ${TOKEN}`,
+  };
 
-    // Upload gambar dan dapatkan URL
-    const uploadImage = async () => {
-        if (!selectedImage) {
-            alert("Please select an image to upload!");
-            return;
+  const fetchBanners = async () => {
+    try {
+      const res = await axios.get(`${BASE_URL}/banners`, { headers });
+      setBanners(res.data.data);
+    } catch (err) {
+      alert(err.response?.data?.message || "Gagal mengambil banner");
+    }
+  };
+
+  useEffect(() => {
+    fetchBanners();
+  }, []);
+
+  const uploadImage = async (file) => {
+    try {
+      const data = new FormData();
+      data.append("file", file);
+
+      const response = await axios.post(`${BASE_URL}/upload-image`, data, {
+        headers: {
+          apiKey: API_KEY,
+          Authorization: `Bearer ${TOKEN}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      return response.data.result; // ✅ Return URL langsung
+    } catch (err) {
+      console.error(err);
+      alert(err.response?.data?.message || "Gagal upload gambar");
+      return null;
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (!formState.name) {
+      alert("Nama banner wajib diisi");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      let imageUrl = formState.imageUrl;
+
+      if (selectedImage) {
+        const uploadedUrl = await uploadImage(selectedImage);
+        if (!uploadedUrl) return;
+        imageUrl = uploadedUrl;
+      }
+
+      const payload = { name: formState.name, imageUrl };
+
+      if (formState.id) {
+        await axios.put(`${BASE_URL}/update-banner/${formState.id}`, payload, { headers });
+        alert("Banner berhasil diperbarui");
+      } else {
+        if (!imageUrl) {
+          alert("Silakan pilih gambar untuk banner baru");
+          return;
         }
+        await axios.post(`${BASE_URL}/create-banner`, payload, { headers });
+        alert("Banner berhasil dibuat");
+      }
 
-        try {
-            const formData = new FormData();
-            formData.append("file", selectedImage);
+      handleCloseDialog();
+      fetchBanners();
+    } catch (err) {
+      console.error(err);
+      alert(err.response?.data?.message || "Gagal menyimpan banner");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-            const response = await axios.post(
-                "https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/upload-image",
-                formData,
-                {
-                    headers: {
-                        apiKey,
-                        "Content-Type": "multipart/form-data",
-                    },
-                }
-            );
+  const handleDelete = async (id) => {
+    if (!window.confirm("Yakin ingin menghapus banner ini?")) return;
 
-            return response.data.url; // URL gambar dari API
-        } catch (error) {
-            console.error("Image upload failed:", error);
-            alert("Image upload failed!");
-            return null;
-        }
-    };
+    try {
+      await axios.delete(`${BASE_URL}/delete-banner/${id}`, { headers });
+      alert("Banner berhasil dihapus");
+      fetchBanners();
+    } catch (err) {
+      console.error(err);
+      alert(err.response?.data?.message || "Gagal menghapus banner");
+    }
+  };
 
-    // Menangani create/update banner
-    const handleSubmit = async () => {
-        let imageUrl = formState.imageUrl;
+  const handleOpenDialog = (banner = { id: null, name: "", imageUrl: "" }) => {
+    setFormState(banner);
+    setSelectedImage(null);
+    setPreviewImage(banner.imageUrl || null);
+    setIsDialogOpen(true);
+  };
 
-        // Jika ada gambar yang dipilih, unggah dulu
-        if (selectedImage) {
-            imageUrl = await uploadImage();
-            if (!imageUrl) return; // Gagal upload, tidak lanjut
-        }
+  const handleCloseDialog = () => {
+    setFormState({ id: null, name: "", imageUrl: "" });
+    setSelectedImage(null);
+    setPreviewImage(null);
+    setIsDialogOpen(false);
+  };
 
-        const method = formState.id ? "put" : "post";
-        const url = formState.id ? `${apiUrl}/${formState.id}` : apiUrl;
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedImage(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => setPreviewImage(reader.result);
+      reader.readAsDataURL(file);
+    } else {
+      setPreviewImage(null);
+    }
+  };
 
-        axios[method](
-            url,
-            { ...formState, imageUrl },
-            { headers: { apiKey } }
-        )
-            .then(() => {
-                getBanerList();
-                handleCloseDialog();
-            })
-            .catch((err) => console.log(err.response));
-    };
+  return (
+    <div className="banner-admin">
+      <h1>Kelola Banner</h1>
+      <Button variant="contained" color="primary" onClick={() => handleOpenDialog()}>
+        Tambah Banner
+      </Button>
 
-    // Menghapus banner
-    const handleDelete = (id) => {
-        if (window.confirm("Are you sure you want to delete this banner?")) {
-            axios
-                .delete(`https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/delete-banner/${id}`, {
-                    headers: {
-                        apiKey,
-                        Authorization: `Bearer <YourToken>`,
-                    },
-                })
-                .then(() => getBanerList())
-                .catch((err) => console.log(err.response));
-        }
-    };
-
-    // Membuka dialog untuk create/edit
-    const handleOpenDialog = (baner = { id: null, name: "", imageUrl: "" }) => {
-        setFormState(baner);
-        setSelectedImage(null); // Reset gambar yang dipilih
-        setIsDialogOpen(true);
-    };
-
-    // Menutup dialog
-    const handleCloseDialog = () => {
-        setFormState({ id: null, name: "", imageUrl: "" });
-        setSelectedImage(null); // Reset gambar yang dipilih
-        setIsDialogOpen(false);
-    };
-
-    useEffect(() => {
-        getBanerList();
-    }, []);
-
-    return (
-        <div>
-            <h1>Banner Admin</h1>
-            <Button variant="contained" color="primary" onClick={() => handleOpenDialog()}>
-                Create Banner
-            </Button>
-
-            <div className="banner-list">
-                {Baner.map((item) => (
-                    <div key={item.id} className="banner-item">
-                        <img src={item.imageUrl} alt={item.name} />
-                        <p>{item.name}</p>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            className="edit"
-                            onClick={() => handleOpenDialog(item)}
-                        >
-                            Edit
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="secondary"
-                            className="delete"
-                            onClick={() => handleDelete(item.id)}
-                        >
-                            Delete
-                        </Button>
-                    </div>
-                ))}
+      <div className="banner-list">
+        {banners.map((item) => (
+          <div key={item.id} className="banner-card">
+            <img
+              src={item.imageUrl || "https://placehold.co/400x200?text=No+Image"}
+              alt={item.name}
+              className="banner-image"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "https://placehold.co/400x200?text=No+Image";
+              }}
+            />
+            <h3>{item.name}</h3>
+            <div className="btn-group">
+              <Button
+                variant="outlined"
+                size="small"
+                onClick={() => handleOpenDialog(item)}
+              >
+                Edit
+              </Button>
+              <Button
+                variant="contained"
+                color="error"
+                size="small"
+                onClick={() => handleDelete(item.id)}
+              >
+                Delete
+              </Button>
             </div>
+          </div>
+        ))}
+      </div>
 
-            <Dialog open={isDialogOpen} onClose={handleCloseDialog}>
-                <DialogTitle>{formState.id ? "Edit Banner" : "Create Banner"}</DialogTitle>
-                <DialogContent>
-                    <TextField
-                        margin="dense"
-                        label="Name"
-                        fullWidth
-                        value={formState.name}
-                        onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                    />
-                    <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => setSelectedImage(e.target.files[0])}
-                        style={{ marginTop: "15px" }}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleCloseDialog} color="secondary">
-                        Cancel
-                    </Button>
-                    <Button onClick={handleSubmit} color="primary">
-                        Save
-                    </Button>
-                </DialogActions>
-            </Dialog>
-        </div>
-    );
+      <Dialog open={isDialogOpen} onClose={handleCloseDialog} fullWidth>
+        <DialogTitle>{formState.id ? "Edit Banner" : "Tambah Banner"}</DialogTitle>
+        <DialogContent>
+          <TextField
+            label="Nama Banner"
+            fullWidth
+            value={formState.name}
+            onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+            sx={{ mb: 2 }}
+          />
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            style={{ marginBottom: "1rem" }}
+          />
+          {previewImage && (
+            <img
+              src={previewImage}
+              alt="Preview"
+              style={{ width: "100%", height: "auto", marginBottom: "1rem" }}
+            />
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="secondary">
+            Batal
+          </Button>
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            disabled={isLoading}
+          >
+            {isLoading ? <CircularProgress size={20} /> : formState.id ? "Update" : "Create"}
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
 };
 
 export default BanerAdmin;

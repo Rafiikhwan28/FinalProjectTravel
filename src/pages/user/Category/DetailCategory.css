@@ -76,6 +76,80 @@
   overflow: hidden;
 }
 
+.btn-add-to-cart {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-add-to-cart:hover {
+  background-color: #125ca4;
+}
+
+.activities-container {
+  margin-top: 3rem;
+}
+
+.activities-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.activity-card {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding-bottom: 1rem;
+  transition: transform 0.3s;
+}
+
+.activity-card:hover {
+  transform: translateY(-5px);
+}
+
+.activity-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.activity-title {
+  font-size: 1.2rem;
+  margin: 0.8rem;
+  color: #333;
+}
+
+.activity-description {
+  font-size: 0.9rem;
+  margin: 0 0.8rem 0.5rem 0.8rem;
+  color: #555;
+}
+
+.activity-price {
+  font-weight: bold;
+  color: #00695c;
+  margin: 0 0.8rem;
+}
+
+.no-activity {
+  text-align: center;
+  color: #777;
+}
+
+
 /* Responsive: untuk layar kecil */
 @media (max-width: 768px) {
   .detail-category-container {

@@ -1,96 +1,71 @@
-/* Container utama halaman kategori */
 .category-page {
+  padding: 2rem;
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: auto;
+  background-color: #f4f6f9;
 }
 
-/* Judul halaman */
 .category-title {
   font-size: 2.5rem;
-  font-weight: 700;
+  font-weight: bold;
   text-align: center;
+  color: #1e3a8a;
   margin-bottom: 2rem;
-  color: #1f2937; /* Gray-800 */
 }
 
-/* Loading dan Error Text */
-.loading-text,
-.error-text {
+.loading,
+.error,
+.no-data {
   text-align: center;
   font-size: 1.2rem;
-  color: #6b7280; /* Gray-500 */
+  color: #666;
+  margin-top: 3rem;
 }
 
-/* Grid responsif untuk kategori */
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1.5rem;
 }
 
-/* Kartu kategori */
-.category-card {
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+.category-item {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
-.category-card:hover {
+.category-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Link styling */
 .category-link {
   text-decoration: none;
   color: inherit;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  display: block;
 }
 
-/* Gambar kategori */
 .category-image {
   width: 100%;
   height: 180px;
   object-fit: cover;
-  border-bottom: 1px solid #f3f4f6; /* Light gray border */
 }
 
-/* Nama kategori */
-.category-name {
-  text-align: center;
-  font-size: 1.1rem;
+.category-item-title {
+  font-size: 1.2rem;
   font-weight: 600;
-  padding: 1rem;
-  color: #374151; /* Gray-700 */
+  color: #2563eb;
+  padding: 0.8rem 1rem 1rem 1rem;
 }
 
-/* Responsive tweaks */
+/* Responsif */
 @media (max-width: 768px) {
   .category-title {
     font-size: 2rem;
   }
 
-  .category-name {
-    font-size: 1rem;
-  }
-
-  .category-image {
-    height: 150px;
-  }
-}
-
-@media (max-width: 480px) {
-  .category-title {
-    font-size: 1.75rem;
-  }
-
-  .category-image {
-    height: 130px;
+  .category-grid {
+    grid-template-columns: 1fr;
   }
 }

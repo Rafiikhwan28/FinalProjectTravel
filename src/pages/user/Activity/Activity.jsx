@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Navbar from "../../../components/Navbar";
 import "./Activity.css";
+import Footer from "../../../components/Footer";
 
 const Activity = () => {
   const [activities, setActivities] = useState([]);
@@ -118,6 +119,7 @@ const Activity = () => {
           </div>
         )}
       </div>
+      <Footer/>
     </>
   );
 };

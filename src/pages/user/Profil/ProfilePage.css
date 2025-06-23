@@ -1,0 +1,163 @@
+.profile-page {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+}
+
+.profile-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #1976d2;
+}
+
+.profile-container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-picture-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #1976d2;
+  margin-bottom: 1rem;
+}
+
+.upload-input {
+  display: block;
+  margin: 0.5rem auto 1rem;
+}
+
+.upload-btn {
+  background: #1976d2;
+  color: #fff;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.upload-btn:hover {
+  background: #135ba1;
+}
+
+.edit-section, .info-section {
+  width: 100%;
+  max-width: 400px;
+}
+
+.edit-section label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.edit-input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn {
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.save-btn {
+  background: #1976d2;
+  color: #fff;
+}
+.save-btn:hover {
+  background: #135ba1;
+}
+
+.cancel-btn {
+  background: #ccc;
+  color: #333;
+}
+.cancel-btn:hover {
+  background: #999;
+}
+
+.edit-btn {
+  background: #1976d2;
+  color: #fff;
+  margin-top: 1rem;
+}
+.edit-btn:hover {
+  background: #135ba1;
+}
+
+.logout-btn {
+  background: #ff4d4d;
+  color: #fff;
+  margin-top: 2rem;
+}
+.logout-btn:hover {
+  background: #cc0000;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 600px) {
+  .profile-page {
+    padding: 1rem;
+  }
+
+  .profile-title {
+    font-size: 2rem;
+  }
+
+  .profile-picture {
+    width: 120px;
+    height: 120px;
+  }
+
+  .edit-section, .info-section {
+    max-width: 100%;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

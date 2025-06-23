@@ -3,24 +3,25 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import './DetailActivity.css';
 import Navbar from "../../../components/Navbar";
+import Footer from "../../../components/Footer";
 
 const DetailActivity = () => {
   const { id } = useParams();
   const [activity, setActivity] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const API_URL = "https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1";
+  const API_KEY = "24405e01-fbc1-45a5-9f5a-be13afcd757c";
+  const TOKEN = localStorage.getItem("access_token"); // pastikan token sudah ada dari login
 
   const getActivityDetail = useCallback(async () => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const res = await axios.get(
-        `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/activity/${id}`,
-        {
-          headers: { apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c" },
-        }
-      );
+      const res = await axios.get(`${API_URL}/activity/${id}`, {
+        headers: { apiKey: API_KEY },
+      });
 
       if (res.data?.data) {
         setActivity(res.data.data);
@@ -42,6 +43,42 @@ const DetailActivity = () => {
   useEffect(() => {
     getActivityDetail();
   }, [getActivityDetail]);
+
+  const handleAddToCart = async () => {
+    if (!TOKEN) {
+      alert("Silakan login terlebih dahulu untuk memesan.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        `${API_URL}/add-cart`,
+        {
+          activityId: activity.id,
+          quantity: 1,
+        },
+        {
+          headers: {
+            apiKey: API_KEY,
+            Authorization: `Bearer ${TOKEN}`,
+          },
+        }
+      );
+      localStorage.setItem("access_token", TOKEN);
+      if (response.data && response.data.message) {
+        alert("Berhasil ditambahkan ke keranjang!");
+      } else {
+        alert("Berhasil ditambahkan ke keranjang, tapi tanpa pesan dari server.");
+      }
+    }catch (error) {
+      console.error(error);
+      if (error.response?.data?.message) {
+        alert(`Gagal menambahkan ke keranjang: ${error.response.data.message}`);
+      } else {
+        alert("Terjadi kesalahan saat menambahkan ke keranjang.");
+      }
+    }
+  };
 
   if (isLoading) return <p className="loading">Loading...</p>;
   if (error) return <p className="error">{error}</p>;
@@ -94,7 +131,10 @@ const DetailActivity = () => {
                 <p>{activity.address}</p>
                 <p>{activity.city}, {activity.province}</p>
               </div>
-              <button className="cta-button">Pesan Sekarang</button>
+
+              <button className="cta-button" onClick={handleAddToCart}>
+                Pesan Sekarang
+              </button>
             </div>
 
             {/* Kanan: map */}
@@ -111,6 +151,7 @@ const DetailActivity = () => {
           </div>
         )}
       </div>
+      <Footer/>
     </>
   );
 };

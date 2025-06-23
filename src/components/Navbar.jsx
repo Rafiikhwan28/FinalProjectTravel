@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import './Navbar.css';
+import "./Navbar.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,38 +22,40 @@ const Navbar = () => {
     }
 
     const handleLogout = () => {
-      axios.get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/logout", {
-        headers: {
-          apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      }).then(() => {
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("user_details");
-        setIsLoggedIn(false);
-        setUserDetails(null);
-        navigate("/");
-      }).catch(() => {
-        alert("Gagal logout, coba lagi.");
-      });
+      axios
+        .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/logout", {
+          headers: {
+            apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        })
+        .then(() => {
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("user_details");
+          setIsLoggedIn(false);
+          setUserDetails(null);
+          navigate("/");
+        })
+        .catch(() => {
+          alert("Gagal logout, coba lagi.");
+        });
     };
 
     setLogoutHandler(() => handleLogout);
   }, [navigate]);
 
-  const toggleMenu = () => setIsOpen(prev => !prev);
-
-  const toggleDropdown = () => setShowDropdown(prev => !prev);
+  const toggleMenu = () => setIsOpen((prev) => !prev);
+  const toggleDropdown = () => setShowDropdown((prev) => !prev);
 
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/">
           <img
-          src="https://learn.dibimbing.id/logo-dibimbing-blue-512.svg"
-          alt="Logo HappyTraveling"
-          className="navbar-logo"
-          onError={(e) => (e.target.src = "/default-logo.png")} // fallback lokal
+            src="https://learn.dibimbing.id/logo-dibimbing-blue-512.svg"
+            alt="Logo HappyTraveling"
+            className="navbar-logo"
+            onError={(e) => (e.target.src = "/default-logo.png")}
           />
         </Link>
 
@@ -62,7 +64,9 @@ const Navbar = () => {
           onClick={toggleMenu}
           role="button"
           tabIndex={0}
-          onKeyPress={e => { if (e.key === 'Enter') toggleMenu(); }}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") toggleMenu();
+          }}
         >
           {isOpen ? "✖" : "☰"}
         </div>
@@ -96,8 +100,18 @@ const Navbar = () => {
 
               {showDropdown && (
                 <div className="dropdown-menu">
-                  <Link to="/profile" onClick={() => setShowDropdown(false)}>Profile</Link>
-                  <button onClick={() => { setShowDropdown(false); if (logoutHandler) logoutHandler(); }}>
+                  <Link to="/profile" onClick={() => setShowDropdown(false)}>
+                    Profile
+                  </Link>
+                  <Link to="/transaksi" onClick={() => setShowDropdown(false)}>
+                    Transaksi Saya
+                  </Link>
+                  <button
+                    onClick={() => {
+                      setShowDropdown(false);
+                      if (logoutHandler) logoutHandler();
+                    }}
+                  >
                     Logout
                   </button>
                 </div>

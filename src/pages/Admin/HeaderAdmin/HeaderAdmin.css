@@ -1,0 +1,63 @@
+.admin-header {
+  background-color:#fff;
+  color: #0b132b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 2px solid #ffb700;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu-toggle {
+  color: #0b132b;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0b132b;
+}
+
+.logo span {
+  color: #ffb700;
+}
+
+.profile-area {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.MuiAvatar-root {
+  width: 42px;
+  height: 42px;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.MuiMenu-paper {
+  border-radius: 8px;
+  min-width: 150px;
+}
+
+.MuiMenuItem-root {
+  font-size: 0.95rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .logo {
+    font-size: 1.2rem;
+  }
+}

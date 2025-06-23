@@ -9,6 +9,12 @@ import Category from "./pages/user/Category/Category";
 import DetailCategory from "./pages/user/Category/DetailCategory";
 import Promo from "./pages/user/Promo/Promo";
 import DetailPromo from "./pages/user/Promo/DetailPromo";
+import Cart from "./pages/user/Cart/Cart";
+import ProfilePage from "./pages/user/Profil/Profil";
+import ActivityByCategory from "./pages/user/Activity/ActivityByCategoryId";
+import Transaksi from "./pages/user/Transaksi/Transaksi.jsx";
+import DetailTransaksi from "./pages/user/Transaksi/DetailTransaksi.jsx";
+import Footer from "./components/Footer.jsx";
 
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import ListBaner from "./pages/Admin/BanerAdmin";
@@ -18,6 +24,10 @@ import ActivityAdmin from "./pages/Admin/ActivityAdmin";
 import CategoryAdmin from "./pages/Admin/CategoryAdmin";
 import PromoAdmin from "./pages/Admin/PromoAdmin";
 import UserList from "./pages/Admin/UserList";
+
+
+
+
 // import PaymentMethod from "./component/Pyment";
 // import ProfilePage from "./component/Profil";
 // import DetailBanner from "./component/Baner/DetailBaner";
@@ -33,8 +43,15 @@ const App = () => {
         <Route path="/detail-activity/:id" element={<DetailActivity/>} />
         <Route path="/category" element={<Category/>} />
         <Route path="/detail-category/:id" element={<DetailCategory/>} />
+        <Route path="/detail-category/:id/activities" element={<ActivityByCategory />} />
         <Route path="/promo" element={<Promo/>} />
         <Route path="/detail-promo/:id" element={<DetailPromo/>} />
+        <Route path="/cart" element={<Cart/>} />
+        <Route path="/profile" element={<ProfilePage/>} />
+        <Route path="/transaksi" element={<Transaksi/>} />
+        <Route path="/transaksi/:id" element={<DetailTransaksi />} />
+        <Route path="/footer" element={<Footer/>} />
+
 
         <Route path="/header-admin" element={<Header/>}/>
         <Route path="/slider-admin" element={<Sidebar/>}/>
