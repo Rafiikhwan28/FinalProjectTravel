@@ -1,0 +1,248 @@
+/* ====================== */
+/* Container Halaman Cart */
+/* ====================== */
+.cart-page {
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: auto;
+  background-color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ==================== */
+/* Judul Halaman Cart   */
+/* ==================== */
+.cart-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* ======================= */
+/* Wrapper Flex Utama Page */
+/* ======================= */
+.cart-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* ==================== */
+/* Daftar Produk (Kiri) */
+/* ==================== */
+.cart-products {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ================= */
+/* Item Keranjang   */
+/* ================= */
+.cart-item {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1rem;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.cart-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 1rem;
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-title {
+  font-size: 1.1rem;
+  color: #1e3a8a;
+  font-weight: 600;
+}
+
+.cart-item-price {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+/* ===================== */
+/* Tombol Tambah/Kurang  */
+/* ===================== */
+.quantity-btn {
+  background: #f3f4f6;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.quantity-btn:hover {
+  background: #e5e7eb;
+}
+
+/* ================== */
+/* Checkbox Pilih All */
+/* ================== */
+.select-all {
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* ========================= */
+/* Container Pembayaran (Kanan) */
+/* ========================= */
+.payment-container {
+  flex: 1;
+  position: sticky;
+  top: 100px;
+  align-self: flex-start;
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  min-width: 280px;
+}
+
+/* ==================== */
+/* Item Metode Pembayaran */
+/* ==================== */
+.payment-method {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  margin-bottom: 0.8rem;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.payment-method:hover {
+  border-color: #2563eb;
+  background: #f0f9ff;
+}
+
+.payment-method.active {
+  border: 2px solid #2563eb;
+  background: #e0f2fe;
+}
+
+.payment-method-avatar {
+  width: 32px;
+  height: 32px;
+  margin-right: 0.8rem;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+/* ============== */
+/* Total Harga    */
+/* ============== */
+.total-box {
+  background: #1e3a8a;
+  color: #fff;
+  border-radius: 10px;
+  padding: 1.2rem 1rem;
+  margin-top: 1.2rem;
+}
+
+.total-box h6 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* ================== */
+/* Tombol Checkout    */
+/* ================== */
+.checkout-btn {
+  background: #fff;
+  color: #1e3a8a;
+  font-weight: bold;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  width: 100%;
+  border: 1px solid #ccc;
+  transition: background 0.3s, color 0.3s;
+}
+
+.checkout-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+/* ================== */
+/* Responsif Tablet   */
+/* ================== */
+@media (max-width: 992px) {
+  .cart-wrapper {
+    gap: 1.5rem;
+  }
+}
+
+/* ================== */
+/* Responsif Mobile   */
+/* ================== */
+@media (max-width: 768px) {
+  .cart-wrapper {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .payment-container {
+    position: static;
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  .cart-title {
+    font-size: 2rem;
+  }
+
+  .cart-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .cart-item img {
+    margin-bottom: 0.5rem;
+    margin-right: 0;
+  }
+
+  .payment-method {
+    flex-direction: column;
+    text-align: center;
+    padding: 0.8rem;
+  }
+
+  .payment-method-avatar {
+    margin-bottom: 0.4rem;
+  }
+}

@@ -22,6 +22,7 @@ const TransaksiAllUser = () => {
       setTransactions(res.data.data);
       setError(null);
     } catch (err) {
+      console.error(err);
       setError("Failed to fetch transactions.");
     } finally {
       setIsLoading(false);
@@ -70,7 +71,6 @@ const TransaksiAllUser = () => {
     <div className="transaksi-container">
       <h2>All User Transactions</h2>
 
-      {/* Filter */}
       <div className="filter-container">
         <label>Filter Status: </label>
         <select
@@ -112,7 +112,14 @@ const TransaksiAllUser = () => {
               <tr key={transaction.id}>
                 <td>{transaction.invoiceId}</td>
                 <td>{transaction.userId}</td>
-                <td>{transaction.payment_method?.name || "N/A"}</td>
+                <td>
+                  <img
+                    src={transaction.payment_method?.imageUrl}
+                    alt={transaction.payment_method?.name}
+                    style={{ width: "50px", marginRight: "0.5rem" }}
+                  />
+                  {transaction.payment_method?.name || "N/A"}
+                </td>
                 <td>{transaction.status}</td>
                 <td>Rp {transaction.totalAmount.toLocaleString()}</td>
                 <td>{new Date(transaction.orderDate).toLocaleDateString()}</td>
@@ -120,18 +127,19 @@ const TransaksiAllUser = () => {
                   <ul className="item-list">
                     {transaction.transaction_items.map((item) => (
                       <li key={item.id} className="item">
-                        {item.imageUrls?.[0] && item.imageUrls[0].startsWith("http") ? (
+                        {item.imageUrls?.[0] ? (
                           <img
-                          src={item.imageUrls[0] ? item.imageUrls : "https://placehold.co/150x150/png?text=No+Image"}
-                          onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = "https://placehold.co/150x150/png?text=No+Image";
-                          }}
-                        />
-                        ):(
+                            src={item.imageUrls[0]}
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = "https://placehold.co/150x150/png?text=No+Image";
+                            }}
+                            alt={item.title}
+                          />
+                        ) : (
                           <div className="no-image">No image</div>
                         )}
-                        
+
                         <div>
                           <p>{item.title}</p>
                           <small>

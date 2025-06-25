@@ -89,7 +89,6 @@ const Home = () => {
             <h1>{banner[0]?.name}</h1>
             <p>{banner[0]?.description}</p>
 
-            {/* ✅ Search + Filter */}
             <Box
               sx={{
                 display: "flex",
@@ -144,95 +143,103 @@ const Home = () => {
 
       {/* ✅ HASIL SEARCH */}
       <section className="section activity-section">
-        <div className="section-header">
-          <h2>Hasil Pencarian Aktivitas</h2>
-        </div>
-        <div className="activity-grid">
-          {filteredActivities.length > 0 ? (
-            filteredActivities.map((item) => (
-              <Link to={`/detail-activity/${item.id}`} key={item.id} className="activity-card">
-                <img src={item.imageUrls?.[0] || placeholderImage} alt={item.title} />
-                <div className="activity-info">
-                  <h3>{item.title}</h3>
-                  <p>{item.description?.slice(0, 60)}...</p>
-                </div>
-              </Link>
-            ))
-          ) : (
-            <p style={{ textAlign: "center", width: "100%", color: "#666" }}>Tidak ada aktivitas ditemukan.</p>
-          )}
+        <div className="container">
+          <div className="section-header">
+            <h2>Hasil Pencarian Aktivitas</h2>
+          </div>
+          <div className="activity-grid">
+            {filteredActivities.length > 0 ? (
+              filteredActivities.map((item) => (
+                <Link to={`/detail-activity/${item.id}`} key={item.id} className="activity-card">
+                  <img src={item.imageUrls?.[0] || placeholderImage} alt={item.title} />
+                  <div className="activity-info">
+                    <h3>{item.title}</h3>
+                    <p>{item.description?.slice(0, 60)}...</p>
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <p style={{ textAlign: "center", width: "100%", color: "#666" }}>Tidak ada aktivitas ditemukan.</p>
+            )}
+          </div>
         </div>
       </section>
 
       {/* ✅ PROMO */}
       <section className="section promo-section">
-        <div className="section-header">
-          <h2>Promo Menarik</h2>
-          <Link to="/promo" className="see-all-link">Lihat Semua</Link>
-        </div>
-        <div className="slider-wrapper">
-          <button onClick={() => scrollSlider(promoSliderRef, "left")} className="slider-btn">❮</button>
-          <div className="slider-container" ref={promoSliderRef}>
-            {promo.map((item) => (
-              <Link to={`/detail-promo/${item.id}`} key={item.id} className="slider-item">
-                <img src={item.imageUrl || placeholderImage} alt={item.title} />
-                <div className="slider-info">
-                  <h3>{item.title}</h3>
-                  <p>{item.description?.slice(0, 60)}...</p>
-                </div>
-              </Link>
-            ))}
+        <div className="container">
+          <div className="section-header">
+            <h2>Promo Menarik</h2>
+            <Link to="/promo" className="see-all-link">Lihat Semua</Link>
           </div>
-          <button onClick={() => scrollSlider(promoSliderRef, "right")} className="slider-btn">❯</button>
+          <div className="slider-wrapper">
+            <button onClick={() => scrollSlider(promoSliderRef, "left")} className="slider-btn">❮</button>
+            <div className="slider-container" ref={promoSliderRef}>
+              {promo.map((item) => (
+                <Link to={`/detail-promo/${item.id}`} key={item.id} className="slider-item">
+                  <img src={item.imageUrl || placeholderImage} alt={item.title} />
+                  <div className="slider-info">
+                    <h3>{item.title}</h3>
+                    <p>{item.description?.slice(0, 60)}...</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <button onClick={() => scrollSlider(promoSliderRef, "right")} className="slider-btn">❯</button>
+          </div>
         </div>
       </section>
 
       {/* ✅ CATEGORY */}
       <section className="section category-section">
-        <div className="section-header">
-          <h2>Jelajahi Berdasarkan Kategori</h2>
-          <Link to="/category" className="see-all-link">Lihat Semua</Link>
-        </div>
-        <div className="slider-wrapper">
-          <button onClick={() => scrollSlider(categorySliderRef, "left")} className="slider-btn">❮</button>
-          <div className="slider-container" ref={categorySliderRef}>
-            {category.map((item) => (
-              <Link to={`/detail-category/${item.id}`} key={item.id} className="slider-item">
-                <img src={item.imageUrl || placeholderImage} alt={item.name} />
-                <div className="slider-info">
-                  <h3>{item.name}</h3>
-                </div>
-              </Link>
-            ))}
+        <div className="container">
+          <div className="section-header">
+            <h2>Jelajahi Berdasarkan Kategori</h2>
+            <Link to="/category" className="see-all-link">Lihat Semua</Link>
           </div>
-          <button onClick={() => scrollSlider(categorySliderRef, "right")} className="slider-btn">❯</button>
+          <div className="slider-wrapper">
+            <button onClick={() => scrollSlider(categorySliderRef, "left")} className="slider-btn">❮</button>
+            <div className="slider-container" ref={categorySliderRef}>
+              {category.map((item) => (
+                <Link to={`/detail-category/${item.id}`} key={item.id} className="slider-item">
+                  <img src={item.imageUrl || placeholderImage} alt={item.name} />
+                  <div className="slider-info">
+                    <h3>{item.name}</h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <button onClick={() => scrollSlider(categorySliderRef, "right")} className="slider-btn">❯</button>
+          </div>
         </div>
       </section>
 
       {/* ✅ ACTIVITY */}
       <section className="section activity-section">
-        <div className="section-header">
-          <h2>Aktivitas Seru</h2>
-          <Link to="/activity" className="see-all-link">Lihat Semua</Link>
-        </div>
-        <div className="slider-wrapper">
-          <button onClick={() => scrollSlider(activitySliderRef, "left")} className="slider-btn">❮</button>
-          <div className="slider-container" ref={activitySliderRef}>
-            {activity.map((item) => (
-              <Link to={`/detail-activity/${item.id}`} key={item.id} className="slider-item">
-                <img src={item.imageUrls?.[0] || placeholderImage} alt={item.title} />
-                <div className="slider-info">
-                  <h3>{item.title}</h3>
-                  <p>{item.description?.slice(0, 60)}...</p>
-                </div>
-              </Link>
-            ))}
+        <div className="container">
+          <div className="section-header">
+            <h2>Aktivitas Seru</h2>
+            <Link to="/activity" className="see-all-link">Lihat Semua</Link>
           </div>
-          <button onClick={() => scrollSlider(activitySliderRef, "right")} className="slider-btn">❯</button>
+          <div className="slider-wrapper">
+            <button onClick={() => scrollSlider(activitySliderRef, "left")} className="slider-btn">❮</button>
+            <div className="slider-container" ref={activitySliderRef}>
+              {activity.map((item) => (
+                <Link to={`/detail-activity/${item.id}`} key={item.id} className="slider-item">
+                  <img src={item.imageUrls?.[0] || placeholderImage} alt={item.title} />
+                  <div className="slider-info">
+                    <h3>{item.title}</h3>
+                    <p>{item.description?.slice(0, 60)}...</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <button onClick={() => scrollSlider(activitySliderRef, "right")} className="slider-btn">❯</button>
+          </div>
         </div>
       </section>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 };

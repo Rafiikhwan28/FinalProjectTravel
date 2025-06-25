@@ -37,30 +37,6 @@ const DetailPromo = () => {
     fetchPromoDetail();
   }, [id]);
 
-  // const handleAddToCart = async () => {
-  //   if (!token) return alert("Silakan login terlebih dahulu!");
-
-  //   try {
-  //     setAddingToCart(true);
-  //     await axios.post(
-  //       `${API_URL}/add-cart`,
-  //       { productId: promo.id, quantity: 1 },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //           apiKey: API_KEY,
-  //         },
-  //       }
-  //     );
-  //     alert("Berhasil ditambahkan ke keranjang!");
-  //   } catch (err) {
-  //     console.error(err);
-  //     alert(err.response?.data?.message || "Gagal menambahkan ke keranjang.");
-  //   } finally {
-  //     setAddingToCart(false);
-  //   }
-  // };
-
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
 
@@ -81,24 +57,27 @@ const DetailPromo = () => {
           <p className="promo-description">{promo.description}</p>
 
           <div className="promo-info-grid">
-            <div><strong>Kode Promo:</strong> {promo.promo_code}</div>
-            <div><strong>Diskon:</strong> Rp {promo.promo_discount_price.toLocaleString()}</div>
-            <div><strong>Min. Transaksi:</strong> Rp {promo.minimum_claim_price.toLocaleString()}</div>
-            <div><strong>S&K:</strong> {promo.terms_condition}</div>
+            <div><span className="badge">🏷️ Kode Promo:</span> <strong>{promo.promo_code}</strong></div>
+            <div><span className="badge">💸 Diskon:</span> <strong>Rp {promo.promo_discount_price.toLocaleString()}</strong></div>
+            <div><span className="badge">🛒 Min. Transaksi:</span> Rp {promo.minimum_claim_price.toLocaleString()}</div>
+            <div><span className="badge">📄 S&K:</span> {promo.terms_condition}</div>
           </div>
 
           <button
             className="btn-add"
-            // onClick={handleAddToCart}
             disabled={addingToCart}
           >
-            {addingToCart ? "Menambahkan..." : "Tambah ke Keranjang"}
+            {addingToCart ? (
+              <div className="loading-spinner"></div>
+            ) : (
+              "🛒 Tambah ke Keranjang"
+            )}
           </button>
 
           <Link to="/promo" className="back-link">← Kembali ke Promo</Link>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

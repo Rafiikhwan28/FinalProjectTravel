@@ -7,11 +7,10 @@ import {
   Button,
   CircularProgress,
   Paper,
-  MenuItem,
-  Select,
-  InputLabel,
-  FormControl,
   Checkbox,
+  Box,
+  FormControlLabel,
+  Grid,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
@@ -28,7 +27,6 @@ const Cart = () => {
   const [selectedItems, setSelectedItems] = useState([]);
 
   const navigate = useNavigate();
-
   const API_KEY = "24405e01-fbc1-45a5-9f5a-be13afcd757c";
   const BASE_URL = "https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1";
   const token = localStorage.getItem("access_token");
@@ -53,6 +51,7 @@ const Cart = () => {
       setLoading(true);
       const response = await axios.get(`${BASE_URL}/carts`, { headers });
       setCartItems(response.data.data);
+      setSelectedItems([]);
     } catch (err) {
       alert(err.response?.data?.message || "Gagal memuat keranjang.");
     } finally {
@@ -99,6 +98,14 @@ const Cart = () => {
     );
   };
 
+  const handleSelectAll = () => {
+    if (selectedItems.length === cartItems.length) {
+      setSelectedItems([]);
+    } else {
+      setSelectedItems(cartItems.map((item) => item.id));
+    }
+  };
+
   const calculateTotal = () => {
     return cartItems
       .filter((item) => selectedItems.includes(item.id))
@@ -121,12 +128,10 @@ const Cart = () => {
       );
 
       alert("Checkout berhasil! Lihat transaksi Anda.");
-      navigate("/transaksi"); // ← arahkan ke halaman transaksi user
-
+      navigate("/transaksi");
       await fetchCartItems();
       setSelectedItems([]);
     } catch (err) {
-      console.error(err);
       alert(err.response?.data?.message || "Gagal checkout.");
     } finally {
       setCheckingOut(false);
@@ -135,17 +140,17 @@ const Cart = () => {
 
   if (loading) {
     return (
-      <div style={{ display: "flex", justifyContent: "center", height: "100vh" }}>
+      <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
         <CircularProgress />
-      </div>
+      </Box>
     );
   }
 
   return (
     <>
       <Navbar />
-      <div style={{ padding: "20px", maxWidth: "1000px", margin: "0 auto" }}>
-        <Typography variant="h4" mb={3}>
+      <Box sx={{ padding: "2rem 1rem", maxWidth: "1200px", margin: "auto" }}>
+        <Typography variant="h4" fontWeight={700} color="#1e3a8a" mb={3} textAlign="center">
           Keranjang Belanja
         </Typography>
 
@@ -154,80 +159,136 @@ const Cart = () => {
             Keranjang Anda kosong.
           </Paper>
         ) : (
-          cartItems.map((item) => (
-            <Paper
-              key={item.id}
-              elevation={3}
-              sx={{ display: "flex", alignItems: "center", p: 2, mb: 2 }}
-            >
-              <Checkbox
-                checked={selectedItems.includes(item.id)}
-                onChange={() => handleCheckboxChange(item.id)}
+          <Grid container spacing={3}>
+            {/* LEFT: Produk */}
+            <Grid item xs={12} md={7}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={selectedItems.length === cartItems.length && cartItems.length > 0}
+                    onChange={handleSelectAll}
+                    indeterminate={
+                      selectedItems.length > 0 && selectedItems.length < cartItems.length
+                    }
+                  />
+                }
+                label="Pilih Semua"
+                sx={{ mb: 2 }}
               />
-              <Avatar
-                src={item.activity.imageUrls[0]}
-                alt={item.activity.title}
-                sx={{ width: 80, height: 80, mr: 2 }}
-                variant="rounded"
-              />
-              <div style={{ flex: 1 }}>
-                <Typography variant="h6">{item.activity.title}</Typography>
-                <Typography color="text.secondary">
-                  Rp {item.activity.price.toLocaleString()} x {item.quantity} = Rp{" "}
-                  {(item.activity.price * item.quantity).toLocaleString()}
-                </Typography>
-              </div>
-              <IconButton onClick={() => handleQuantityChange(item, -1)}>
-                <RemoveIcon />
-              </IconButton>
-              <Typography>{item.quantity}</Typography>
-              <IconButton onClick={() => handleQuantityChange(item, 1)}>
-                <AddIcon />
-              </IconButton>
-              <IconButton color="error" onClick={() => handleRemoveFromCart(item.id)}>
-                <DeleteIcon />
-              </IconButton>
-            </Paper>
-          ))
-        )}
 
-        {cartItems.length > 0 && (
-          <Paper
-            elevation={4}
-            sx={{ p: 3, mt: 3, background: "#1976d2", color: "#fff", borderRadius: 2 }}
-          >
-            <Typography variant="h6">
-              Total Harga: Rp {calculateTotal().toLocaleString()}
-            </Typography>
+              {cartItems.map((item) => (
+                <Paper
+                  key={item.id}
+                  elevation={3}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    p: 2,
+                    mb: 2,
+                    borderRadius: "12px",
+                    boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+                  }}
+                >
+                  <Checkbox
+                    checked={selectedItems.includes(item.id)}
+                    onChange={() => handleCheckboxChange(item.id)}
+                  />
+                  <Avatar
+                    src={item.activity.imageUrls[0]}
+                    alt={item.activity.title}
+                    sx={{ width: 80, height: 80, mr: 2, borderRadius: 2 }}
+                    variant="rounded"
+                  />
+                  <Box sx={{ flex: 1 }}>
+                    <Typography variant="h6" color="#2563eb" fontWeight={600}>
+                      {item.activity.title}
+                    </Typography>
+                    <Typography color="text.secondary" mt={0.5}>
+                      Rp {item.activity.price.toLocaleString()} x {item.quantity} = Rp{" "}
+                      {(item.activity.price * item.quantity).toLocaleString()}
+                    </Typography>
+                  </Box>
+                  <Box display="flex" alignItems="center" gap={1}>
+                    <IconButton onClick={() => handleQuantityChange(item, -1)}>
+                      <RemoveIcon />
+                    </IconButton>
+                    <Typography>{item.quantity}</Typography>
+                    <IconButton onClick={() => handleQuantityChange(item, 1)}>
+                      <AddIcon />
+                    </IconButton>
+                    <IconButton color="error" onClick={() => handleRemoveFromCart(item.id)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </Box>
+                </Paper>
+              ))}
+            </Grid>
 
-            <FormControl fullWidth sx={{ mt: 2, background: "#fff", borderRadius: 1 }}>
-              <InputLabel>Metode Pembayaran</InputLabel>
-              <Select
-                value={selectedPaymentMethod}
-                onChange={(e) => setSelectedPaymentMethod(e.target.value)}
-                label="Metode Pembayaran"
+            {/* RIGHT: Metode Pembayaran + Checkout */}
+            <Grid item xs={12} md={5}>
+              <Paper
+                elevation={4}
+                sx={{
+                  p: 3,
+                  background: "#f1f5f9",
+                  borderRadius: 2,
+                }}
               >
-                {paymentMethods.map((method) => (
-                  <MenuItem key={method.id} value={method.id}>
-                    {method.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+                <Typography variant="h6" fontWeight={600} mb={2}>
+                  Pilih Metode Pembayaran
+                </Typography>
 
-            <Button
-              onClick={handleCreateTransaction}
-              fullWidth
-              variant="contained"
-              color="secondary"
-              sx={{ mt: 2, backgroundColor: "#fff", color: "#1976d2", fontWeight: "bold" }}
-              disabled={checkingOut}
-            >
-              {checkingOut ? "Memproses..." : "Checkout"}
-            </Button>
-          </Paper>
+                <Box display="flex" flexWrap="wrap" gap={2} mb={2}>
+                  {paymentMethods.map((method) => (
+                    <Paper
+                      key={method.id}
+                      elevation={selectedPaymentMethod === method.id ? 6 : 2}
+                      onClick={() => setSelectedPaymentMethod(method.id)}
+                      sx={{
+                        p: 1,
+                        width: "48%",
+                        display: "flex",
+                        alignItems: "center",
+                        cursor: "pointer",
+                        border:
+                          selectedPaymentMethod === method.id
+                            ? "2px solid #2563eb"
+                            : "1px solid #ccc",
+                        borderRadius: 2,
+                        backgroundColor:
+                          selectedPaymentMethod === method.id ? "#e0f2fe" : "#fff",
+                      }}
+                    >
+                      <Avatar
+                        src={method.imageUrl}
+                        alt={method.name}
+                        sx={{ width: 40, height: 40, mr: 1 }}
+                      />
+                      <Typography variant="body2" fontWeight={500}>
+                        {method.name}
+                      </Typography>
+                    </Paper>
+                  ))}
+                </Box>
+
+                <Typography variant="h6" mb={2}>
+                  Total: <b>Rp {calculateTotal().toLocaleString()}</b>
+                </Typography>
+
+                <Button
+                  onClick={handleCreateTransaction}
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  disabled={checkingOut}
+                >
+                  {checkingOut ? "Memproses..." : "Bayar Sekarang"}
+                </Button>
+              </Paper>
+            </Grid>
+          </Grid>
         )}
-      </div>
+      </Box>
     </>
   );
 };

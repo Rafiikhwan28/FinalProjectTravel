@@ -7,10 +7,14 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [cartItemCount, setCartItemCount] = useState(3);
+  const [cartItemCount, setCartItemCount] = useState(0);
   const [userDetails, setUserDetails] = useState(null);
   const [logoutHandler, setLogoutHandler] = useState(null);
   const navigate = useNavigate();
+
+  const API_URL = "https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1";
+  const API_KEY = "24405e01-fbc1-45a5-9f5a-be13afcd757c";
+  const TOKEN = localStorage.getItem("access_token");
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
@@ -23,10 +27,10 @@ const Navbar = () => {
 
     const handleLogout = () => {
       axios
-        .get("https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/logout", {
+        .get(`${API_URL}/logout`, {
           headers: {
-            apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            apiKey: API_KEY,
+            Authorization: `Bearer ${token}`,
           },
         })
         .then(() => {
@@ -44,33 +48,55 @@ const Navbar = () => {
     setLogoutHandler(() => handleLogout);
   }, [navigate]);
 
+  // ================= FETCH CART COUNT =================
+  const fetchCartItemCount = async () => {
+    if (!TOKEN) return;
+
+    try {
+      const response = await axios.get(`${API_URL}/carts`, {
+        headers: {
+          apiKey: API_KEY,
+          Authorization: `Bearer ${TOKEN}`,
+        },
+      });
+
+      const cartItems = response.data?.data || [];
+      const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+      setCartItemCount(totalItems);
+    } catch (error) {
+      console.error("Gagal mengambil data cart:", error);
+      setCartItemCount(0); // fallback jika error
+    }
+  };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchCartItemCount();
+    }
+  }, [isLoggedIn]);
+
   const toggleMenu = () => setIsOpen((prev) => !prev);
   const toggleDropdown = () => setShowDropdown((prev) => !prev);
 
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/">
+
+        {/* LOGO */}
+        <Link to="/" className="logo-link">
           <img
             src="https://learn.dibimbing.id/logo-dibimbing-blue-512.svg"
-            alt="Logo HappyTraveling"
+            alt="HappyTraveling"
             className="navbar-logo"
-            onError={(e) => (e.target.src = "/default-logo.png")}
           />
         </Link>
 
-        <div
-          className="menu-icon"
-          onClick={toggleMenu}
-          role="button"
-          tabIndex={0}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") toggleMenu();
-          }}
-        >
+        {/* BURGER MENU ICON */}
+        <button className="menu-toggle" onClick={toggleMenu} aria-label="Toggle Menu">
           {isOpen ? "✖" : "☰"}
-        </div>
+        </button>
 
+        {/* NAVIGATION LINKS */}
         <div className={`navbar-links ${isOpen ? "open" : ""}`}>
           <ul className="nav-menu">
             <li><Link to="/" onClick={() => setIsOpen(false)}>Home</Link></li>
@@ -79,50 +105,49 @@ const Navbar = () => {
             <li><Link to="/promo" onClick={() => setIsOpen(false)}>Promo</Link></li>
           </ul>
 
-          <div className="cart-icon">
-            <Link to="/cart">
+          {/* CART & USER */}
+          <div className="nav-actions">
+            <Link to="/cart" className="cart-icon" onClick={() => setIsOpen(false)}>
               🛒
-              {cartItemCount > 0 && (
-                <span className="cart-badge">{cartItemCount}</span>
-              )}
+              {cartItemCount > 0 && <span className="cart-badge">{cartItemCount}</span>}
             </Link>
-          </div>
 
-          {isLoggedIn ? (
-            <div className="user-dropdown">
-              <div className="user-avatar" onClick={toggleDropdown}>
-                <img
-                  src={userDetails?.profilePictureUrl || "/default-avatar.png"}
-                  alt={userDetails?.name || "User"}
-                  className="avatar-img"
-                />
+            {isLoggedIn ? (
+              <div className="user-menu">
+                <button className="avatar-btn" onClick={toggleDropdown} aria-label="User Menu">
+                  <img
+                    src={userDetails?.profilePictureUrl || "/default-avatar.png"}
+                    alt="User Avatar"
+                    className="avatar-img"
+                  />
+                </button>
+
+                {showDropdown && (
+                  <div className="dropdown-menu">
+                    <Link to="/profile" onClick={() => setShowDropdown(false)}>Profile</Link>
+                    <Link to="/transaksi" onClick={() => setShowDropdown(false)}>Transaksi</Link>
+                    <button
+                      onClick={() => {
+                        setShowDropdown(false);
+                        if (logoutHandler) logoutHandler();
+                      }}
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
               </div>
-
-              {showDropdown && (
-                <div className="dropdown-menu">
-                  <Link to="/profile" onClick={() => setShowDropdown(false)}>
-                    Profile
-                  </Link>
-                  <Link to="/transaksi" onClick={() => setShowDropdown(false)}>
-                    Transaksi Saya
-                  </Link>
-                  <button
-                    onClick={() => {
-                      setShowDropdown(false);
-                      if (logoutHandler) logoutHandler();
-                    }}
-                  >
-                    Logout
-                  </button>
-                </div>
-              )}
-            </div>
-          ) : (
-            <div className="auth-buttons">
-              <Link to="/login" className="btn btn-green">Masuk</Link>
-              <Link to="/register" className="btn btn-gray">Daftar</Link>
-            </div>
-          )}
+            ) : (
+              <div className="auth-buttons">
+                <Link to="/login" className="btn btn-green" onClick={() => setIsOpen(false)}>
+                  Masuk
+                </Link>
+                <Link to="/register" className="btn btn-gray" onClick={() => setIsOpen(false)}>
+                  Daftar
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </nav>
