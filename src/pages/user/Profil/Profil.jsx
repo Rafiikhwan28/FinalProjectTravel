@@ -18,7 +18,7 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("access_token");
 
-  // Axios instance to DRY (Don't Repeat Yourself)
+ 
   const axiosInstance = axios.create({
     baseURL: API_URL,
     headers: {
@@ -83,7 +83,7 @@ const ProfilePage = () => {
       });
 
       alert("Profile picture updated!");
-      window.location.reload(); // Bisa diganti dengan refetch jika tidak ingin reload
+      window.location.reload(); 
     } catch (err) {
       setError(err.response?.data?.message || "Failed to upload image.");
     }

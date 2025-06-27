@@ -50,7 +50,7 @@ const Activity = () => {
 
       if (res.data?.data) {
         setActivities(res.data.data);
-        setSearchResults(res.data.data); // Default tampil semua
+        setSearchResults(res.data.data); 
       } else {
         throw new Error("Invalid data format");
       }

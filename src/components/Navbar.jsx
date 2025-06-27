@@ -48,8 +48,7 @@ const Navbar = () => {
     setLogoutHandler(() => handleLogout);
   }, [navigate]);
 
-  // ================= FETCH CART COUNT =================
-  const fetchCartItemCount = async () => {
+    const fetchCartItemCount = async () => {
     if (!TOKEN) return;
 
     try {
@@ -65,7 +64,7 @@ const Navbar = () => {
       setCartItemCount(totalItems);
     } catch (error) {
       console.error("Gagal mengambil data cart:", error);
-      setCartItemCount(0); // fallback jika error
+      setCartItemCount(0); 
     }
   };
 

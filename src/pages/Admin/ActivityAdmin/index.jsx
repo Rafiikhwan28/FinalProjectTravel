@@ -41,11 +41,11 @@ const ActivityAdmin = () => {
     try {
       setLoading(true);
       const res = await axios.get(`${API_URL}/activities`, { headers });
-      console.log("Fetched activities:", res.data); // Log respons
+      console.log("Fetched activities:", res.data); 
       setActivities(res.data.data);
       setError("");
     } catch (err) {
-      console.error("Error fetching activities:", err); // Log error
+      console.error("Error fetching activities:", err); 
       setError(err.response?.data?.message || "Gagal mengambil data aktivitas");
     } finally {
       setLoading(false);
@@ -106,7 +106,7 @@ const ActivityAdmin = () => {
       };
 
       if (editMode) {
-        await axios.put(`${API_URL}/update-activity/${editingId}`, payload, {
+        await axios.post(`${API_URL}/update-activity/${editingId}`, payload, {
           headers,
         });
         alert("Aktivitas berhasil diupdate");
@@ -118,7 +118,7 @@ const ActivityAdmin = () => {
       resetForm();
       fetchActivities();
     } catch (err) {
-      console.error("Error saving activity:", err); // Log error
+      console.error("Error saving activity:", err); 
       setError(err.response?.data?.message || "Gagal menyimpan aktivitas");
     } finally {
       setLoading(false);
@@ -145,7 +145,7 @@ const ActivityAdmin = () => {
       city: activity.city || "",
       location_maps: activity.location_maps || "",
       categoryId: activity.categoryId,
-      imageFile: null, // reset untuk upload gambar baru
+      imageFile: null,
     });
     setEditMode(true);
     setEditingId(activity.id);
@@ -160,7 +160,7 @@ const ActivityAdmin = () => {
       alert("Aktivitas berhasil dihapus");
       fetchActivities();
     } catch (err) {
-      console.error("Error deleting activity:", err); // Log error
+      console.error("Error deleting activity:", err); 
       setError(err.response?.data?.message || "Gagal menghapus aktivitas");
     } finally {
       setLoading(false);

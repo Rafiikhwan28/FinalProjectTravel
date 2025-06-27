@@ -45,7 +45,7 @@ const PromoAdmin = () => {
     }
   };
 
-  // ✅ Upload gambar dan return URL hasil upload
+  
   const uploadImage = async (file) => {
     try {
       const data = new FormData();
@@ -74,7 +74,6 @@ const PromoAdmin = () => {
     try {
       let imageUrl = null;
 
-      // Upload gambar jika ada file baru
       if (imageFile) {
         imageUrl = await uploadImage(imageFile);
         if (!imageUrl) return;

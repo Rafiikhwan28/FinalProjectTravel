@@ -10,7 +10,7 @@ const Category = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fallbackImage = "/fallback-image.png"; // Simpan di folder public/
+  const fallbackImage = "/fallback-image.png";
 
   const fetchCategories = async () => {
     try {

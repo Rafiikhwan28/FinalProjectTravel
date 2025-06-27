@@ -1,4 +1,3 @@
-// App.js
 import { BrowserRouter as Router, Routes, Route, BrowserRouter } from "react-router-dom";
 import Login from "./pages/user/Login/Login";
 import Register from "./pages/user/Register/Register";
@@ -28,9 +27,6 @@ import UserList from "./pages/Admin/UserList";
 
 
 
-// import PaymentMethod from "./component/Pyment";
-// import ProfilePage from "./component/Profil";
-// import DetailBanner from "./component/Baner/DetailBaner";
 
 const App = () => {
   return (
@@ -61,6 +57,7 @@ const App = () => {
         <Route path="/promo-admin" element={<PromoAdmin/>}/>
         <Route path="/admin-dashboard" element={<AdminDashboard/>}/>
         <Route path="/userlist" element={<UserList/>}/>
+
       </Routes>
     </BrowserRouter>
   );

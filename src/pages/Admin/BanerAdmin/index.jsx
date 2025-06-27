@@ -44,7 +44,7 @@ const BanerAdmin = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      return response.data.data.url; // ✅ Sesuai dengan struktur response API
+      return response.data.data.url;
     } catch (error) {
       console.error(error);
       alert(error.response?.data?.message || "Gagal upload gambar");
