@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/user/Login/Login";
 import Register from "./pages/user/Register/Register";
 import Home from "./pages/user/Home/Home";
@@ -24,42 +24,176 @@ import CategoryAdmin from "./pages/Admin/CategoryAdmin";
 import PromoAdmin from "./pages/Admin/PromoAdmin";
 import UserList from "./pages/Admin/UserList";
 
-
-
-
+import ProtectedRoute from "./components/ProtectedRoute"; // 🟢 Tambahkan ini
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
+        {/* Public routes */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register/>}/>
-        <Route path="/activity" element={<Activity/>} />
-        <Route path="/detail-activity/:id" element={<DetailActivity/>} />
-        <Route path="/category" element={<Category/>} />
-        <Route path="/detail-category/:id" element={<DetailCategory/>} />
-        <Route path="/detail-category/:id/activities" element={<ActivityByCategory />} />
-        <Route path="/promo" element={<Promo/>} />
-        <Route path="/detail-promo/:id" element={<DetailPromo/>} />
-        <Route path="/cart" element={<Cart/>} />
-        <Route path="/profile" element={<ProfilePage/>} />
-        <Route path="/transaksi" element={<Transaksi/>} />
-        <Route path="/transaksi/:id" element={<DetailTransaksi />} />
-        <Route path="/footer" element={<Footer/>} />
+        <Route path="/register" element={<Register />} />
 
+        {/* User routes (protected) */}
+        <Route
+          path="/activity"
+          element={
+            <ProtectedRoute>
+              <Activity />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/detail-activity/:id"
+          element={
+            <ProtectedRoute>
+              <DetailActivity />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/category"
+          element={
+            <ProtectedRoute>
+              <Category />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/detail-category/:id"
+          element={
+            <ProtectedRoute>
+              <DetailCategory />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/detail-category/:id/activities"
+          element={
+            <ProtectedRoute>
+              <ActivityByCategory />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/promo"
+          element={
+            <ProtectedRoute>
+              <Promo />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/detail-promo/:id"
+          element={
+            <ProtectedRoute>
+              <DetailPromo />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/transaksi"
+          element={
+            <ProtectedRoute>
+              <Transaksi />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/transaksi/:id"
+          element={
+            <ProtectedRoute>
+              <DetailTransaksi />
+            </ProtectedRoute>
+          }
+        />
 
-        <Route path="/header-admin" element={<Header/>}/>
-        <Route path="/slider-admin" element={<Sidebar/>}/>
-        <Route path="/activity-admin" element={<ActivityAdmin/>}/>
-        <Route path="/category-admin" element={<CategoryAdmin/>}/>
-        <Route path="/listBaner-admin" element={<ListBaner/>}/>
-        <Route path="/promo-admin" element={<PromoAdmin/>}/>
-        <Route path="/admin-dashboard" element={<AdminDashboard/>}/>
-        <Route path="/userlist" element={<UserList/>}/>
+        <Route path="/footer" element={<Footer />} />
 
+        {/* Admin routes (protected juga) */}
+        <Route
+          path="/header-admin"
+          element={
+            <ProtectedRoute>
+              <Header />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/slider-admin"
+          element={
+            <ProtectedRoute>
+              <Sidebar />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/activity-admin"
+          element={
+            <ProtectedRoute>
+              <ActivityAdmin />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/category-admin"
+          element={
+            <ProtectedRoute>
+              <CategoryAdmin />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/listBaner-admin"
+          element={
+            <ProtectedRoute>
+              <ListBaner />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/promo-admin"
+          element={
+            <ProtectedRoute>
+              <PromoAdmin />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin-dashboard"
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/userlist"
+          element={
+            <ProtectedRoute>
+              <UserList />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 };
 
