@@ -49,7 +49,6 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: rgba(0, 0, 0, 0.5);
   color: var(--text-light);
   padding: 2rem;
 }
